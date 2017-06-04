@@ -1,0 +1,734 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Rebex.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Rebex.FileMode">
+            <summary>
+            Defines file open mode.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.CreateNew">
+            <summary>
+            Create a new file. Fail if it already exists.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.Create">
+            <summary>
+            Create a new file. Overwrite existing files.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.Open">
+            <summary>
+            Open existing file.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.OpenOrCreate">
+            <summary>
+            Create a new file if it doesn't exists. Otherwise, create a new file.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.Truncate">
+            <summary>
+            Open an existing file and truncate its length to zero bytes.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileMode.Append">
+            <summary>
+            Open an existing file and seek to an end.
+            </summary>
+        </member>
+        <member name="T:Rebex.FileAccess">
+            <summary>
+            Defines read/write access to a file.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileAccess.Read">
+            <summary>
+            Read-only access.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileAccess.Write">
+            <summary>
+            Write-only access.
+            </summary>
+        </member>
+        <member name="F:Rebex.FileAccess.ReadWrite">
+            <summary>
+            Read-write access.
+            </summary>
+        </member>
+        <member name="T:Rebex.Messages">
+            <summary>
+            Provides methods for constructing exception messages.
+            </summary>
+        </member>
+        <member name="T:Rebex.Security.BinaryHelper">
+            <summary>
+            A helper class that reads and writes basic data types
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.BinaryHelper.WriteInt32(System.IO.Stream,System.Int32)">
+            <summary>
+            Writes a 32-bit integer to a specified stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.BinaryHelper.WriteInt64(System.IO.Stream,System.Int64)">
+            <summary>
+            Writes a 64-bit integer to a specified stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.BinaryHelper.ReadInt32(System.IO.Stream)">
+            <summary>
+            Reads a 32-bit integer from a specified stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.BinaryHelper.ReadInt64(System.IO.Stream)">
+            <summary>
+            Reads a 64-bit integer from a specified stream.
+            </summary>
+        </member>
+        <member name="T:Rebex.Security.FileEncryptionAlgorithm">
+            <summary>
+            Specifies algorithm used to encrypt or decrypt.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.FileEncryptionAlgorithm.AesXts">
+            <summary>
+            AES in XTS mode.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.FileEncryptionAlgorithm.AesCbc">
+            <summary>
+            AES in CBC mode.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.FileEncryptionAlgorithm.TripleDesCbc">
+            <summary>
+            TripleDes in CBC mode.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.FileEncryptionAlgorithm.TwofishCbc">
+            <summary>
+            Twofish in CBC mode.
+            </summary>
+        </member>
+        <member name="T:Rebex.Security.KeyDerivationAlgorithm">
+            <summary>
+            Specifies key derivation algorithm from password.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.KeyDerivationAlgorithm.Rfc2898">
+            <summary>
+            Use RFC 2898 implementation of key derivation from password.
+            </summary>
+        </member>
+        <member name="T:Rebex.Security.FileEncryption">
+            <summary>
+            Provides high level API for encrypting and decrypting files and streams.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:Rebex.Security.FileEncryption"/> object.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.Decrypt(System.String,System.String)">
+            <summary>
+            Decrypts a source file into a target file.
+            </summary>
+            <param name="sourceFile">The file to decrypt.</param>
+            <param name="targetFile">The name of the decrypted file. This cannot be a directory.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.Decrypt(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Decrypts data from a source stream into a target stream.
+            </summary>
+            <param name="sourceStream">Readable stream with encrypted data.</param>
+            <param name="targetStream">Writable stream that will receive the decrypted data.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.Encrypt(System.String,System.String)">
+            <summary>
+            Encrypts a source file into a target file.
+            </summary>
+            <param name="sourceFile">The file to encrypt.</param>
+            <param name="targetFile">The name of the encrypted file. This cannot be a directory.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.Encrypt(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Encrypts data from a source stream into a target stream.
+            </summary>
+            <param name="sourceStream">Readable stream with input data.</param>
+            <param name="targetStream">Writable stream that will receive the encrypted data.</param>
+        </member>
+        <member name="P:Rebex.Security.FileEncryption.OverwriteExistingFile">
+            <summary>
+            Get or sets a value indicating whether to overwrite existing target files.
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.FileEncryption.EncryptionAlgorithm">
+            <summary>
+            Gets or sets encryption algorithm used for encryption and decryption.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.SetPassword(System.Byte[])">
+            <summary>
+            Sets password for encryption and decryption.
+            </summary>
+            <param name="password">Password for encryption and decryption.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.SetPassword(System.String)">
+            <summary>
+            Sets password for encryption and decryption.
+            </summary>
+            <param name="password">Password for encryption and decryption.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.SetPassword(System.Byte[],Rebex.Security.KeyDerivationAlgorithm)">
+            <summary>
+            Sets password for encryption and decryption.
+            </summary>
+            <param name="password">Password for encryption and decryption.</param>
+            <param name="algorithm">Key derivation algorithm.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.SetPassword(System.String,Rebex.Security.KeyDerivationAlgorithm)">
+            <summary>
+            Sets password for encryption and decryption.
+            </summary>
+            <param name="password">Password for encryption and decryption.</param>
+            <param name="algorithm">Key derivation algorithm.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.DecryptAsync(System.String,System.String,System.Object)">
+            <summary>
+            Begins asynchronous Decrypt operation.
+            Decrypts a source file into a target file.
+            </summary>
+            <param name="sourceFile">The file to decrypt.</param>
+            <param name="targetFile">The name of the decrypted file. This cannot be a directory.</param>
+            <param name="state">An optional user-provided object that identifies this particular asynchronous operation.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.DecryptAsync(System.IO.Stream,System.IO.Stream,System.Object)">
+            <summary>
+            Begins asynchronous Decrypt operation.
+            Decrypts data from a source stream into a target stream.
+            </summary>
+            <param name="sourceStream">Readable stream with encrypted data.</param>
+            <param name="targetStream">Writable stream that will receive the decrypted data.</param>
+            <param name="state">An optional user-provided object that identifies this particular asynchronous operation.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.EncryptAsync(System.String,System.String,System.Object)">
+            <summary>
+            Begins asynchronous Encrypt operation.
+            Encrypts a source file into a target file.
+            </summary>
+            <param name="sourceFile">The file to encrypt.</param>
+            <param name="targetFile">The name of the encrypted file. This cannot be a directory.</param>
+            <param name="state">An optional user-provided object that identifies this particular asynchronous operation.</param>
+        </member>
+        <member name="M:Rebex.Security.FileEncryption.EncryptAsync(System.IO.Stream,System.IO.Stream,System.Object)">
+            <summary>
+            Begins asynchronous Encrypt operation.
+            Encrypts data from a source stream into a target stream.
+            </summary>
+            <param name="sourceStream">Readable stream with input data.</param>
+            <param name="targetStream">Writable stream that will receive the encrypted data.</param>
+            <param name="state">An optional user-provided object that identifies this particular asynchronous operation.</param>
+        </member>
+        <member name="T:Rebex.Security.XtsStream">
+            <summary>
+            Implements XTS-AES, a standard algorithm for protection of stored data defined by IEEE P1619.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.XtsStream.DefaultBlockSize">
+            <summary>
+            Default block size (64 KB).
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.BlockSize">
+            <summary>
+            Gets a size of one XTS block in bytes
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.CanRead">
+            <summary>
+            Gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>true if the stream supports reading; otherwise, false.</returns>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.CanSeek">
+            <summary>
+            Gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <returns>true if the stream supports seeking; otherwise, false.</returns>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.CanWrite">
+            <summary>
+            Gets a value indicating whether the current stream supports writing.
+            </summary>
+            <returns>true if the stream supports writing; otherwise, false.</returns>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.Length">
+            <summary>
+            Gets the length in bytes of the stream.
+            </summary>
+            <returns>
+            A long value representing the length of the stream in bytes.
+            </returns>
+            <exception cref="T:System.NotSupportedException">
+            A class derived from Stream does not support seeking.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="P:Rebex.Security.XtsStream.Position">
+            <summary>
+            Gets or sets the position within the current stream.
+            </summary>
+            <returns>
+            The current position within the stream.
+            </returns>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The stream does not support seeking.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Position is set to a negative number or is greater than the stream length. If you need to increase stream length, use the SetLength method first.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="password">The password that is used to generate the encryption key.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="password"/> is null.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="password">The password that is used to generate the encryption key.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="password"/> is null.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="password">The password that is used to generate the encryption key.</param>
+            <param name="blockSize">The XTS algorithm block size in bytes. Must be multiple of 16. Default value is 65536. 
+            Use smaller buffer if you read very small parts of a stream from different places, or use larger buffer if you do sequential reads of large blocks. 
+            Setting this value might negatively impact the performance.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="password"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+             <paramref name="blockSize" /> is negative, zero or not multiple of 16.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,System.Byte[],System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="password">The password that is used to generate the encryption key.</param>
+            <param name="blockSize">The XTS algorithm block size in bytes. Must be multiple of 16. Default value is 65536, maximum number is 1048576.
+            Use smaller buffer if you read very small parts of a stream from different places, or use larger buffer if you do sequential reads of large blocks. 
+            Setting this value might negatively impact the performance.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="password"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+             <paramref name="blockSize" /> is negative, zero or not multiple of 16.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,Rebex.Security.Cryptography.Pkcs.PublicKeyInfo,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="key">The public key used to encrypt a randomly-generated password.</param>
+            <param name="blockSize">The XTS algorithm block size in bytes. Must be multiple of 16. Default value is 65536, maximum number is 1048576.
+            Use smaller buffer if you read very small parts of a stream from different places, or use larger buffer if you do sequential reads of large blocks. 
+            Setting this value might negatively impact the performance.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="key"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+             <paramref name="blockSize" /> is negative, zero or not multiple of 16.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,Rebex.Security.Cryptography.Pkcs.PrivateKeyInfo,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="key">The private key used to encrypt or decrypt a randomly-generated password.</param>
+            <param name="blockSize">The XTS algorithm block size in bytes. Must be multiple of 16. Default value is 65536, maximum number is 1048576.
+            Use smaller buffer if you read very small parts of a stream from different places, or use larger buffer if you do sequential reads of large blocks. 
+            Setting this value might negatively impact the performance.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="key"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+             <paramref name="blockSize" /> is negative, zero or not multiple of 16.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.#ctor(System.IO.Stream,Rebex.Security.Cryptography.AsymmetricKeyAlgorithm,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Rebex.Security.XtsStream"/> class.
+            </summary>
+            <param name="baseStream">The base stream that contains or will contain encrypted data in the Rebex XTS format.</param>
+            <param name="key">The public or private key used to encrypt or decrypt a randomly-generated password.</param>
+            <param name="blockSize">The XTS algorithm block size in bytes. Must be multiple of 16. Default value is 65536, maximum number is 1048576.
+            Use smaller buffer if you read very small parts of a stream from different places, or use larger buffer if you do sequential reads of large blocks. 
+            Setting this value might negatively impact the performance.</param>
+            <exception cref="T:System.NotSupportedException">
+             <paramref name="baseStream" /> is not readable or seekable.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="baseStream"/> or <paramref name="key"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+             <paramref name="blockSize" /> is negative, zero or not multiple of 16.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.Flush">
+            <summary>
+            Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.</param>
+            <param name="count">The maximum number of bytes to be read from the current stream.</param>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            The sum of <paramref name="offset"/> and <paramref name="count"/> is larger than the buffer length.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative.
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The stream does not support reading.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the current stream.
+            </summary>
+            <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter.</param>
+            <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position.</param>
+            <returns>
+            The new position within the current stream.
+            </returns>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Position is set to a negative number or is greater than the stream length. If you need to increase stream length, use the SetLength method first.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.SetLength(System.Int64)">
+            <summary>
+            Sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes.</param>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
+            <param name="count">The number of bytes to be written to the current stream.</param>
+            <exception cref="T:System.ArgumentException">
+            The sum of <paramref name="offset"/> and <paramref name="count"/> is greater than the buffer length.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative.
+            </exception>
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The stream does not support writing.
+            </exception>
+            <exception cref="T:System.ObjectDisposedException">
+            Methods were called after the stream was closed.
+            </exception>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.GenerateHeader(System.Byte[],Rebex.Security.Cryptography.AsymmetricKeyAlgorithm)">
+            <summary>
+            Generates the header of the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.InitializeFromHeader(System.Byte[],Rebex.Security.Cryptography.AsymmetricKeyAlgorithm)">
+            <summary>
+            Parses the header of the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.GenerateSalt">
+            <summary>
+            Generates the salt that will be (together with the password) used to generate the encryption key, and saves it.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.DecryptPassword(Rebex.Security.Cryptography.AsymmetricKeyAlgorithm)">
+            <summary>
+            Reads an encrypted password and decrypts it using the supplied key.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.GenerateEncryptedPassword(Rebex.Security.Cryptography.AsymmetricKeyAlgorithm)">
+            <summary>
+            Generates a password, encrypts it using the supplied key, and saves it.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.InitializeCipher(System.Byte[])">
+            <summary>
+            Initializes the encryption keys from the password and salt.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.InitializeStream(System.Byte[],Rebex.Security.Cryptography.AsymmetricKeyAlgorithm)">
+            <summary>
+            Ensures the header of the underlying stream exists and is valid.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.LoadCurrentBlock(System.Int64)">
+            <summary>
+            Reads the current block from the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.SaveCurrentBlock(System.Boolean)">
+            <summary>
+            Writes the current block to the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.PrepareTweakForBlock(System.Int64,System.Byte[])">
+            <summary>
+            Prepares the XTS tweak for a specified block into a specified array.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.SetPosition(System.Int64)">
+            <summary>
+            Sets the position in the current stream.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.AssertStreamWriteable">
+            <summary>
+            Ensures that the underlying stream is writeable and throws if it is not.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.AssertStreamSeekable">
+            <summary>
+            Ensures that the underlying stream is seekable and throws if it is not.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.AssertBlockSizeValid(System.Int32,System.Boolean)">
+            <summary>
+            Ensures that the block size is valid and throws if it is not.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.AssertNotDisposed">
+            <summary>
+            Ensures that the stream is not disposed and throws if it is.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.XtsStream.GetPadding(System.Int32)">
+            <summary>
+            Calculated the number of bytes needed to pad the specified block size to a multiple of block length.
+            </summary>
+            <param name="blockSize">Block size to pad.</param>
+            <returns>Padding length.</returns>
+        </member>
+        <member name="T:Rebex.Security.Cryptography.CryptoStreamMode">
+            <summary>
+            Mode of <see cref="T:Rebex.Security.Cryptography.CryptoStream"/>.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.Cryptography.CryptoStreamMode.Read">
+            <summary>
+            Reading mode.
+            </summary>
+        </member>
+        <member name="F:Rebex.Security.Cryptography.CryptoStreamMode.Write">
+            <summary>
+            Writing mode.
+            </summary>
+        </member>
+        <member name="T:Rebex.Security.Cryptography.CryptoStream">
+            <summary>
+            Provides cryptographic transformation of stream data.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.#ctor(System.IO.Stream,Rebex.Security.Cryptography.ICryptoTransform,Rebex.Security.Cryptography.CryptoStreamMode)">
+            <summary>
+            Creates CryptoStream instance.
+            </summary>
+            <param name="stream">Base stream for writing to or reading from.</param>
+            <param name="transform">Cryptographic transformation object used by this instance.</param>
+            <param name="mode">Reading or writing mode.</param>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.CanRead">
+            <summary>
+            Gets if this stream can be read from.
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.CanSeek">
+            <summary>
+            Gets if this stream supports seeking.
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.CanWrite">
+            <summary>
+            Gets if it is possible to write to this stream.
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.HasFlushedFinalBlock">
+            <summary>
+            Gets if final block was transformed.
+            </summary>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.Length">
+            <summary>
+            Gets stream length.
+            </summary>
+            <remarks>
+            This property is not supported.
+            </remarks>
+        </member>
+        <member name="P:Rebex.Security.Cryptography.CryptoStream.Position">
+            <summary>
+            Gets position in the stream.
+            </summary>
+            <remarks>
+            This property is not supported.
+            </remarks>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Seek position in the stream.
+            </summary>
+            <param name="offset">A byte offset relative to <paramref name="origin"/> parameter.</param>
+            <param name="origin">The reference point to get new position</param>
+            <returns>This method is not supported.</returns>
+            <remarks>
+            This method is not supported.
+            </remarks>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.SetLength(System.Int64)">
+            <summary>
+            Sets the length of the stream.
+            </summary>
+            <param name="value">New length of the stream.</param>
+            <remarks>
+            This method is not supported.
+            </remarks>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.Flush">
+            <summary>
+            This method is not meaningful for this class.
+            </summary>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a sequecne of bytes to the buffer.
+            </summary>
+            <param name="buffer">Array of bytes to get the bytes read.</param>
+            <param name="offset">Offset in the buffer.</param>
+            <param name="count">Maximum bytes to be read.</param>
+            <returns>Number of bytes actually read.</returns>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a sequecne of bytes to the stream.
+            </summary>
+            <param name="buffer">A byte array containing data to write.</param>
+            <param name="offset">Offset in the buffer.</param>
+            <param name="count">Number of bytes to write.</param>
+        </member>
+        <member name="M:Rebex.Security.Cryptography.CryptoStream.FlushFinalBlock">
+            <summary>
+            Transforms final block. It is called as and of writing to the stream.
+            </summary>
+            <remarks>
+            There is no need to call this method manualy because if the stream is closed (Disposed) this method is called automaticaly.
+            </remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,9 @@
+/ignoreAccessChecks
+/metadataFile "C:\Projects\CryptoNote\CryptoNote\obj\ARM\Release\ilc\intermediate\ILTransformed\CryptoNote.metadata"
+/gvmAssemblyName "System.Private.CoreLib"
+/o
+/sharedGenerics
+/ilmergeinfo "C:\Projects\CryptoNote\CryptoNote\obj\ARM\Release\ilc\intermediate\ILTransformed\CryptoNote.csv"
+/sharedGenericsMode StandardHeuristics
+/in "C:\Projects\CryptoNote\CryptoNote\obj\ARM\Release\ilc\intermediate\ILTransformed\CryptoNote.ilexe"
+/out "C:\Projects\CryptoNote\CryptoNote\obj\ARM\Release\ilc\intermediate\MDIL\CryptoNote.mdilexe"
